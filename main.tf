@@ -11,6 +11,7 @@ terraform{
     }
   }
   required_version = ">= 1.1.0"
+
   cloud {
     organization = "rdcresume"
 
@@ -19,6 +20,12 @@ terraform{
     }
   }
 }
+
+provider "aws" {
+  region = "us-east-2"
+}
+
+resource "random_pet" "sg" {}
 
 # Configure the S3 bucket
 resource "aws_s3_bucket" "crchost2" {
