@@ -1,82 +1,70 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "4.52.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "3.4.3"
-    }
+terraform{
+  # Configure the AWS Provider
+  provider "aws" {
+    region = "us-east-1"
   }
-  required_version = ">= 1.1.0"
-
   cloud {
-    organization = "REPLACE_ME"
+    organization = "rdcresume"
 
     workspaces {
-      name = "learn-terraform-github-actions"
+      name = "resume-frontend"
     }
   }
 }
 
-provider "aws" {
-  region = "us-west-2"
+# Configure the S3 bucket
+resource "aws_s3_bucket" "crchost2" {
+  bucket = "crchost2"
 }
 
-resource "random_pet" "sg" {}
-
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
-}
-
-resource "aws_instance" "web" {
-  ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.web-sg.id]
-
-  user_data = <<-EOF
-              #!/bin/bash
-              apt-get update
-              apt-get install -y apache2
-              sed -i -e 's/80/8080/' /etc/apache2/ports.conf
-              echo "Hello World" > /var/www/html/index.html
-              systemctl restart apache2
-              EOF
-}
-
-resource "aws_security_group" "web-sg" {
-  name = "${random_pet.sg.id}-sg"
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  // connectivity to ubuntu mirrors is required to run `apt-get update` and `apt-get install apache2`
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+# Setting up bucket ownership
+resource "aws_s3_bucket_ownership_controls" "open" {
+  bucket = aws_s3_bucket.crchost2.id
+  rule {
+    object_ownership = "BucketOwnerEnforced"
   }
 }
 
-output "web-address" {
-  value = "${aws_instance.web.public_dns}:8080"
+# Configure the bucket to be publicly accessible
+resource "aws_s3_bucket_public_access_block" "publicAccess" {
+  bucket = aws_s3_bucket.crchost2.id
+
+  block_public_policy     = false
+  restrict_public_buckets = false
+}
+
+# Adding the file to the S3 bucket
+resource "aws_s3_object" "object" {
+  bucket = aws_s3_bucket.crchost2.id
+  key    = "Resume.html"
+  source = "${path.module}/BucketItems/Resume.html"
+  content_type = "text/html"
+}
+
+# Configuring bucket to host a static website
+resource "aws_s3_bucket_website_configuration" "Resume" {
+  bucket = aws_s3_bucket.crchost2.id
+
+  index_document {
+    suffix = "Resume.html"
+  }
+}
+
+# Policy to allow objects in bucket to be open to the public
+resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
+  bucket = aws_s3_bucket.crchost2.id
+  policy = <<POLICY
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::${aws_s3_bucket.crchost2.id}/*"
+        }
+    ]
+  }
+  POLICY
 }
