@@ -1,8 +1,17 @@
 terraform{
   # Configure the AWS Provider
-  provider "aws" {
-    region = "us-east-1"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.52.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.4.3"
+    }
   }
+  required_version = ">= 1.1.0"
+
   cloud {
     organization = "rdcresume"
 
@@ -11,6 +20,12 @@ terraform{
     }
   }
 }
+
+provider "aws" {
+  region = "us-east-2"
+}
+
+resource "random_pet" "sg" {}
 
 # Configure the S3 bucket
 resource "aws_s3_bucket" "crchost2" {
