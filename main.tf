@@ -1,6 +1,6 @@
 terraform{
   # Configure the AWS Provider
-  equired_providers {
+  required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "4.52.0"
