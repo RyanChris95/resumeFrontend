@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Resume</title>
+</head>
+<style>
+	body
+	{
+		background-color: white;
+	}
+
+	.grid-container 
+	{
+  		display: grid;
+  		grid-template-columns: auto auto;
+  		padding: 10px;
+		border-top: 10px solid Black;
+		font-family: Georgia;
+		color: DarkBlue
+	}
+
+	.grid-container > div 
+	{
+  		background-color: white;
+  		text-align: left;
+  		padding: 1px 0;
+  		font-size: 15px;
+		gap: 1px;
+	}
+
+	.item1 
+	{
+  		grid-column-start: 1;
+  		grid-column-end: 3;
+	}
+
+	.item2 
+	{
+  		grid-column-start: 1;
+  		grid-column-end: 3;
+	}
+
+	.item5 
+	{
+  		grid-column-start: 1;
+  		grid-column-end: 3;
+	}
+
+	.item6 
+	{
+  		grid-column-start: 1;
+  		grid-column-end: 3;
+	}
+
+	div.total
+	{
+		background-color: white;
+		width: 75%;
+		padding: 1px;
+		margin: 12%;
+	}
+
+	.header
+	{
+		float: left;
+	}
+
+	.contact
+	{
+		float: right;
+	}
+
+	h1.head
+	{
+		font-size: 3em;
+		line-height: 0;
+	}
+
+	h2.small 
+	{
+  		line-height: 0;
+	}
+
+	p.small 
+	{
+  		line-height: 0;
+	}
+
+	.br 
+	{
+            	display: block;
+            	margin-bottom: -1em;
+        }
+
+	.brsmall 
+	{
+            	display: block;
+            	margin-bottom: -1.5em;
+        }
+
+	ul.a 
+	{
+  		list-style-type: circle;
+	}
+	ul.b 
+	{
+  		list-style-type: square;
+	}
+
+</style>
+<div class="total">
+<div class="grid-container">
+	<div class="item1">
+		<div class="header">
+
+			<h1 class ="head">RYAN CHRISTOPHER</h1>
+
+			<em>Computer Scientist</em>
+
+		</div>
+
+		<div class="contact">
+
+			<a href = "mailto: ryandchristopher95@gmail.com">Email</a>
+			
+			<br>
+
+			<a href="https://www.linkedin.com/in/ryan-christopher-37aa43104/" target="_blank">LinkedIn</a>
+
+			<br> 
+
+			<body onload="displayCounter()">
+    			<script>
+				function displayCounter(){
+					fetch('https://y0g0sfbjx6.execute-api.us-east-2.amazonaws.com/prod/callVisitorFunc',{method: 'GET'})
+    					.then(response => {return response.json()} )
+  					.then(data => document.getElementById("count").innerText = data)
+					}
+			</script>
+			Visits: <span id="count"></span>
+
+		</div>
+
+	</div>
+
+	<div class="item2">
+
+	<hr>
+
+	<span class=brsmall"></span>
+
+	<h2 class="small">Profile</h2>
+
+	<p> I am a Computer Scientist working for the Air Force, having specialized in 	the testing of cyber tools. My goal is to pursue a career in cyber defense 	securing systems to help companies protect not only themselves, but their 	customers and their employees. </p> <hr> 
+
+	</div>
+
+	<div class="item3">
+
+	<h2 class="small">Certifications</h2>
+	<ul class="b">
+  		<li>AWS Certified Cloud Practitioner</li>
+  		<li>CompTIA Security+</li>
+  		<li>CompTIA PenTest+</li>
+  		<li>CompTIA CYSA+</li>
+  		<li>GIAC Cloud Security Essentials (GCLD)</li>
+  		<li>GIAC Advisory Board</li>
+	</ul>
+	</div>
+
+	<div class="item4">
+
+	<h2 class="small">Degrees</h2>
+	<ul class="b">
+		
+		<li>Masters in Cybersecurity from <em>Maryville University</em></li>
+		<ul class="a">
+			<li>Graduated in 2020</li>
+			<li>GPA: 4.0</li>
+		</ul>
+		<li>BA in Applied Mathematics from <em>California State University of Sacramento</em></li>
+		<ul class="a">
+			<li>Graduated 2018</li>
+			<li>Member of the General Education Honor's Program</li>
+			<li>Minor in Computer Science</li>
+			<li>GPA: 3.24</li>
+		</ul>
+	</ul>
+	</div>
+	
+	<div class="item5">
+	<hr>
+	<h2 class="small">Highlights</h2>
+	<ul class="b">
+		<li>TS//SCI Clearance</li>
+		<li>Experience working within AWS and Azure</li>
+		<li>Familiarity with STIG compliance to test vulnerabilities</li>
+		<li>Experienced in TCP/IP networking protocols</li>
+		<li>Coding Languages</li>
+		<ul class="a">
+			<li>Python</li>
+			<li>Java</li>
+			<li>Bash</li>
+			<li>PowerShell</li>
+			<li>Selenium</li>
+			<li>Robot Framework</li>
+			<li>Visual Basic</li>
+		</ul>
+	</ul>
+	<hr>
+	</div>
+
+	<div class="item6">
+	
+	<h2 class="head">Work History</h2>
+
+	<h4><strong>AIR FORCE (CIVILIAN): CYBER SECURITY ASSESSMENT (CSA) FLIGHT</strong></h4>
+
+	<p class="small"><strong>Mission Lead</strong> | <em>San Antonio, TX</em> | <em>Dec 2021 - Current</em></p>
+
+	<ul class="b">
+		<li>Prepare a formal test plan strategizing our plan of attack for testing the customer's production system</li>
+		<li>Facilitate security assessments by working with the customer to determine what kind of tests they require, and then working with the contractors to provide them their best results </li>
+		<li> Ensure the contractors have anything they would need for the test, such as: access to the system, cyber tools, or the binary of the tool to test </li>
+		<li> Collaborate closely with leadership to keep them informed on how the tests are going, and any assistance we would require </li>
+	</ul>
+
+	<h4><strong>AIR FORCE (CIVILIAN): SMALL SCALE EMBEDDED TEST TEAM</strong></h4>
+
+	<p class="small"><strong>Test Engineer</strong> | <em>San Antonio, TX</em> | <em>Aug 2021 - Jun 2022</em></p>
+
+	<ul class="b">
+		<li>Collaborate closely with the development team to provide agile workflow within the SDLC for the customer</li>
+		<li>Lead automated test writer, using Python, Robot Framework, and Selenium</li>
+		<li>Create formal reports to show detailed test cases</li>
+		<li>Provide feedback to development team about any bugs that arise with the new code fix within CI/CD pipeline</li>
+		<li>Troubleshoot configuration files for installation of tools</li>
+		<li>Create/tear down virtual machines for implementation of virtual environment</li>
+	</ul>
+
+	<h4><strong>AIR FORCE (CIVILIAN): UNDERGRADUATE CYBER WARFARE TRAINING</strong></h4>
+
+	<p class="small"><strong>Computer Scientist</strong> | <em>Biloxi, MS</em> | <em>Jan 2021 - Aug 2021</em></p>
+
+	<ul class="b">
+		<li>Used Cisco packet tracer to setup a virtual network, and troubleshooted any issues that may arise</li>
+		<ul class="a">
+			<li>Network link down</li>
+			<li>Setting up routing tables</li>
+			<li>Configuring VLANS</li>
+		</ul>
+		<li>Performed penetration testing using Kali Linux, and Metasploit to establish persistence on target systems</li>
+		<li>Protected a network by establishing rules within the IDS/IPS, web proxies, firewall, and ACL to</li>
+		<ul class="a">
+			<li>Prevent unauthorized access</li>
+			<li>Block phishing attempts</li>
+			<li>Establish a DNS sinkhole</li>
+		</ul>
+	</ul>
+
+	<h4><strong>AIR FORCE (CIVILIAN): TEMPEST</strong></h4>
+
+	<p class="small"><strong>Computer Scientist</strong> | <em>San Antonio, TX</em> | <em>May 2020 - Jan 2021</em></p>
+
+	<ul class="b">
+		<li>Automated Visual Basic code to automate excel spreadsheets</li>
+		<li>Created a work breakdown structure to help determine needed manpower</li>
+		<li>Completed course on TEMPEST Test Familiarization, learning how adversaries could use radio waves to target systems</li>
+	</ul>
+
+	<h4><strong>AIR FORCE (CIVILIAN): UNIFIED CAPABILITIES ASSESSMENT PROGRAM (UCAP)</strong></h4>
+
+	<p class="small"><strong>Computer Scientist</strong> | <em>San Antonio, TX</em> | <em>Sep 2019 - May 2020</em></p>
+
+	<ul class="b">
+		<li>Testing products to determine security risks before putting on Department of Defense network</li>
+		<li>Used Security Technical Implementation Guide (STIG) to determine CAT I, II, and III findings with product</li>
+		<li>Created automated PowerShell script to run a STIG Test</li>
+		<li>Created reports to provide to the customer on what is needed in order to be approved</li>
+	</ul>
+	</div>
+</div>
+</div>
+
+
+</body>
+</html>
+
